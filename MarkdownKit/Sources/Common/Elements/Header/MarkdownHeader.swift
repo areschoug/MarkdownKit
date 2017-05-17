@@ -11,9 +11,8 @@ open class MarkdownHeader: MarkdownLevelElement {
 
   fileprivate static let regex = "^(#{1,%@})\\s*(.+)$"
 
+  open var attributes: [String : AnyObject]
   open var maxLevel: Int
-  open var font: MarkdownFont?
-  open var color: MarkdownColor?
   open var fontIncrease: Int
 
   open var regex: String {
@@ -21,16 +20,14 @@ open class MarkdownHeader: MarkdownLevelElement {
     return String(format: MarkdownHeader.regex, level)
   }
 
-  public init(font: MarkdownFont? = MarkdownHeader.defaultFont,
-              maxLevel: Int = 0, fontIncrease: Int = 2, color: MarkdownColor? = nil) {
+  public init(attributes: [String: AnyObject] = [:], maxLevel: Int = 0, fontIncrease: Int = 2) {
+    self.attributes = attributes
     self.maxLevel = maxLevel
-    self.font = font
-    self.color = color
     self.fontIncrease = fontIncrease
   }
 
   open func formatText(_ attributedString: NSMutableAttributedString, range: NSRange, level: Int) {
-      attributedString.deleteCharacters(in: range)
+    attributedString.deleteCharacters(in: range)
   }
 
     open func attributesForLevel(_ level: Int) -> [NSAttributedString.Key: AnyObject] {
