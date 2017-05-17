@@ -11,10 +11,9 @@ import UIKit
 open class MarkdownLink: MarkdownLinkElement {
   
   fileprivate static let regex = "\\[[^\\[]*?\\]\\([^\\)]*\\)"
-  
-  open var font: UIFont?
-  open var color: UIColor?
-  
+
+  open var attributes: [String: AnyObject]
+
   open var regex: String {
     return MarkdownLink.regex
   }
@@ -22,13 +21,11 @@ open class MarkdownLink: MarkdownLinkElement {
   open func regularExpression() throws -> NSRegularExpression {
     return try NSRegularExpression(pattern: regex, options: .dotMatchesLineSeparators)
   }
-  
-  public init(font: UIFont? = nil, color: UIColor? = UIColor.blue) {
-    self.font = font
-    self.color = color
+
+  public init(attributes: [String: AnyObject] = [:]) {
+    self.attributes = attributes
   }
-  
-  
+
   open func formatText(_ attributedString: NSMutableAttributedString, range: NSRange,
                          link: String) {
     guard let encodedLink = link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class MarkdownParser {
+open class MarkdownParser: MarkdownStyle {
 
   // MARK: Element Arrays
   fileprivate var escapingElements: [MarkdownElement]
@@ -34,23 +34,23 @@ open class MarkdownParser {
 
   // MARK: Configuration
   /// Enables or disables detection of URLs even without Markdown format
+  open var attributes: [String : AnyObject]
   open var automaticLinkDetectionEnabled: Bool = true
-  open let font: UIFont
 
   // MARK: Initializer
-  public init(font: UIFont = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+  public init(attributes: [String: AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)],
               automaticLinkDetectionEnabled: Bool = true,
               customElements: [MarkdownElement] = []) {
-    self.font = font
+    self.attributes = attributes
 
-    header = MarkdownHeader(font: font)
-    list = MarkdownList(font: font)
-    quote = MarkdownQuote(font: font)
-    link = MarkdownLink(font: font)
-    automaticLink = MarkdownAutomaticLink(font: font)
-    bold = MarkdownBold(font: font)
-    italic = MarkdownItalic(font: font)
-    code = MarkdownCode(font: font)
+    header = MarkdownHeader(attributes: attributes)
+    list = MarkdownList(attributes: attributes)
+    quote = MarkdownQuote(attributes: attributes)
+    link = MarkdownLink(attributes: attributes)
+    automaticLink = MarkdownAutomaticLink(attributes: attributes)
+    bold = MarkdownBold(attributes: attributes)
+    italic = MarkdownItalic(attributes: attributes)
+    code = MarkdownCode(attributes: attributes)
 
     self.automaticLinkDetectionEnabled = automaticLinkDetectionEnabled
     self.escapingElements = [codeEscaping, escaping]
@@ -80,8 +80,9 @@ open class MarkdownParser {
 
   open func parse(_ markdown: NSAttributedString) -> NSAttributedString {
     let attributedString = NSMutableAttributedString(attributedString: markdown)
-    attributedString.addAttribute(NSFontAttributeName, value: font,
-                                  range: NSRange(location: 0, length: attributedString.length))
+
+    attributedString.setAttributes(attributes, range: NSRange(location: 0, length: attributedString.length))
+
     var elements: [MarkdownElement] = escapingElements
     elements.append(contentsOf: defaultElements)
     elements.append(contentsOf: customElements)

@@ -12,16 +12,14 @@ open class MarkdownCode: MarkdownCommonElement {
 
   fileprivate static let regex = "(\\s+|^)(`+)(\\s*.*?[^`]\\s*)(\\1)(?!`)"
 
-  open var font: UIFont?
-  open var color: UIColor?
+  open var attributes: [String: AnyObject]
 
   open var regex: String {
     return MarkdownCode.regex
   }
 
-  public init(font: UIFont? = nil, color: UIColor? = nil) {
-    self.font = font
-    self.color = color
+  public init(attributes: [String: AnyObject] = [:]) {
+    self.attributes = attributes
   }
 
   open func addAttributes(_ attributedString: NSMutableAttributedString, range: NSRange) {
