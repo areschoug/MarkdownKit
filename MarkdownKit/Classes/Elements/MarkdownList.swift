@@ -38,7 +38,7 @@ open class MarkdownList: MarkdownLevelElement {
   }
 
   public func addAttributes(_ attributedString: NSMutableAttributedString, range: NSRange, level: Int) {
-    let added = indicator.characters.count + separator.characters.count
+    let added = indicator.count + separator.count
     attributedString.addAttributes(attributesForLevel(level - 1), range: NSRange(location: range.location - added, length:range.length + added))
   }
   
