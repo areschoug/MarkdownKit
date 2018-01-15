@@ -50,9 +50,11 @@ extension String {
     //     decode("&foo;")    --> nil
     func decode(_ entity: String) -> Character? {
       if entity.hasPrefix("&#x") || entity.hasPrefix("&#X") {
-        return decodeNumeric(entity.substring(from: entity.index(entity.startIndex, offsetBy: 3)), base: 16)
+				let obj = entity[entity.index(entity.startIndex, offsetBy: 3)...]
+				return decodeNumeric(String(obj), base: 16)
       } else if entity.hasPrefix("&#") {
-        return decodeNumeric(entity.substring(from: entity.index(entity.startIndex, offsetBy: 2)), base: 10)
+				let obj = entity[entity.index(entity.startIndex, offsetBy: 2)...]
+        return decodeNumeric(String(obj), base: 10)
       } else {
         return characterEntities[entity]
       }
@@ -78,7 +80,7 @@ extension String {
           result.append(decoded)
         } else {
           // Invalid entity, copy verbatim:
-          result.append(entity.description)
+          result.append(String(entity))
         }
       } else {
         // No matching ';'.

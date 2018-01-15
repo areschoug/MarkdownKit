@@ -11,7 +11,7 @@ open class MarkdownHeader: MarkdownLevelElement {
 
   fileprivate static let regex = "^(#{1,%@})\\s*(.+)$"
 
-  open var attributes: [String : AnyObject]
+  open var attributes: [NSAttributedStringKey: AnyObject]
   open var maxLevel: Int
   open var fontIncrease: Int
 
@@ -20,7 +20,7 @@ open class MarkdownHeader: MarkdownLevelElement {
     return String(format: MarkdownHeader.regex, level)
   }
 
-  public init(attributes: [String: AnyObject] = [:], maxLevel: Int = 0, fontIncrease: Int = 2) {
+  public init(attributes: [NSAttributedStringKey: AnyObject] = [:], maxLevel: Int = 0, fontIncrease: Int = 2) {
     self.attributes = attributes
     self.maxLevel = maxLevel
     self.fontIncrease = fontIncrease
