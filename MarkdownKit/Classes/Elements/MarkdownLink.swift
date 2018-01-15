@@ -12,7 +12,7 @@ open class MarkdownLink: MarkdownLinkElement {
   
   fileprivate static let regex = "\\[[^\\[]*?\\]\\([^\\)]*\\)"
 
-  open var attributes: [String: AnyObject]
+  open var attributes: [NSAttributedStringKey: AnyObject]
 
   open var regex: String {
     return MarkdownLink.regex
@@ -22,7 +22,7 @@ open class MarkdownLink: MarkdownLinkElement {
     return try NSRegularExpression(pattern: regex, options: .dotMatchesLineSeparators)
   }
 
-  public init(attributes: [String: AnyObject] = [:]) {
+  public init(attributes: [NSAttributedStringKey: AnyObject] = [:]) {
     self.attributes = attributes
   }
 
@@ -33,7 +33,7 @@ open class MarkdownLink: MarkdownLinkElement {
       return
     }
     guard let url = URL(string: link) ?? URL(string: encodedLink) else { return }
-    attributedString.addAttribute(NSLinkAttributeName, value: url, range: range)
+    attributedString.addAttribute(NSAttributedStringKey.link, value: url, range: range)
   }
   
   open func match(_ match: NSTextCheckingResult, attributedString: NSMutableAttributedString) {

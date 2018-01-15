@@ -12,13 +12,13 @@ open class MarkdownItalic: MarkdownCommonElement {
 
   fileprivate static let regex = "(\\s+|^)(\\*|_)(.+?)(\\2)"
 
-  open var attributes: [String: AnyObject]
+  open var attributes: [NSAttributedStringKey: AnyObject]
 
   open var regex: String {
     return MarkdownItalic.regex
   }
 
-  public init(attributes: [String: AnyObject] = [:]) {
+  public init(attributes: [NSAttributedStringKey: AnyObject] = [:]) {
     self.attributes = attributes
   }
 

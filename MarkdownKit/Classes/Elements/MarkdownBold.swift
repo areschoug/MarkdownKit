@@ -12,13 +12,13 @@ open class MarkdownBold: MarkdownCommonElement {
 
   fileprivate static let regex = "(\\s+|^)(\\*\\*|__)(.+?)(\\2)"
 
-  open var attributes: [String: AnyObject]
+  open var attributes: [NSAttributedStringKey: AnyObject]
 
   open var regex: String {
     return MarkdownBold.regex
   }
 
-  public init(attributes: [String: AnyObject] = [:]) {
+  public init(attributes: [NSAttributedStringKey: AnyObject] = [:]) {
     self.attributes = attributes
   }
 
