@@ -11,7 +11,7 @@ open class MarkdownQuote: MarkdownLevelElement {
 
   fileprivate static let regex = "^(\\>{1,%@})\\s*(.+)$"
 
-  open var attributes: [NSAttributedStringKey: AnyObject]
+  open var attributes: [NSAttributedString.Key: AnyObject]
   open var maxLevel: Int
   open var separator: String
   open var indicator: String
@@ -21,7 +21,7 @@ open class MarkdownQuote: MarkdownLevelElement {
     return String(format: MarkdownQuote.regex, level)
   }
 
-  public init(attributes: [NSAttributedStringKey: AnyObject] = [:], maxLevel: Int = 0, indicator: String = ">",
+  public init(attributes: [NSAttributedString.Key: AnyObject] = [:], maxLevel: Int = 0, indicator: String = ">",
               separator: String = "  ") {
     self.attributes = attributes
     self.maxLevel = maxLevel
