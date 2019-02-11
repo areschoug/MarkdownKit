@@ -12,7 +12,7 @@ open class MarkdownHeader: MarkdownLevelElement {
 
   fileprivate static let regex = "^(#{1,%@})\\s*(.+)$"
 
-  open var attributes: [NSAttributedStringKey: AnyObject]
+  open var attributes: [NSAttributedString.Key: AnyObject]
   open var maxLevel: Int
   open var fontIncrease: Int
 
@@ -21,7 +21,7 @@ open class MarkdownHeader: MarkdownLevelElement {
     return String(format: MarkdownHeader.regex, level)
   }
 
-  public init(attributes: [NSAttributedStringKey: AnyObject] = [:], maxLevel: Int = 0, fontIncrease: Int = 2) {
+  public init(attributes: [NSAttributedString.Key: AnyObject] = [:], maxLevel: Int = 0, fontIncrease: Int = 2) {
     self.attributes = attributes
     self.maxLevel = maxLevel
     self.fontIncrease = fontIncrease
@@ -31,11 +31,11 @@ open class MarkdownHeader: MarkdownLevelElement {
     attributedString.deleteCharacters(in: range)
   }
 
-  open func attributesForLevel(_ level: Int) -> [NSAttributedStringKey: AnyObject] {
+  open func attributesForLevel(_ level: Int) -> [NSAttributedString.Key: AnyObject] {
     var attributes = self.attributes
-    if let font = self.attributes[NSAttributedStringKey.font] as? UIFont {
+    if let font = self.attributes[NSAttributedString.Key.font] as? UIFont {
       let headerFontSize: CGFloat = font.pointSize + (CGFloat(level) * CGFloat(fontIncrease))
-      attributes[NSAttributedStringKey.font] = font.withSize(headerFontSize)
+      attributes[NSAttributedString.Key.font] = font.withSize(headerFontSize)
     }
     return attributes
   }

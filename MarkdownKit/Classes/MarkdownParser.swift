@@ -34,11 +34,11 @@ open class MarkdownParser: MarkdownStyle {
 
   // MARK: Configuration
   /// Enables or disables detection of URLs even without Markdown format
-  open var attributes: [NSAttributedStringKey : AnyObject]
+  open var attributes: [NSAttributedString.Key : AnyObject]
   open var automaticLinkDetectionEnabled: Bool = true
 
   // MARK: Initializer
-  public init(attributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)],
+  public init(attributes: [NSAttributedString.Key: AnyObject] = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)],
               automaticLinkDetectionEnabled: Bool = true,
               customElements: [MarkdownElement] = []) {
     self.attributes = attributes

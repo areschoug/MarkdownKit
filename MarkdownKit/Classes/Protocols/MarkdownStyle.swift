@@ -11,6 +11,6 @@ import UIKit
 /// Styling protocol for all MarkdownElements
 public protocol MarkdownStyle {
   
-  var attributes: [NSAttributedStringKey: AnyObject] { get }
+  var attributes: [NSAttributedString.Key: AnyObject] { get }
 }
 
