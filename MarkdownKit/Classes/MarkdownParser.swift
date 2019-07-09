@@ -18,14 +18,14 @@ open class MarkdownParser: MarkdownStyle {
   open var customElements: [MarkdownElement]
 
   // MARK: Basic Elements
-  open let header: MarkdownHeader
-  open let list: MarkdownList
-  open let quote: MarkdownQuote
-  open let link: MarkdownLink
-  open let automaticLink: MarkdownAutomaticLink
-  open let bold: MarkdownBold
-  open let italic: MarkdownItalic
-  open let code: MarkdownCode
+  public let header: MarkdownHeader
+  public let list: MarkdownList
+  public let quote: MarkdownQuote
+  public let link: MarkdownLink
+  public let automaticLink: MarkdownAutomaticLink
+  public let bold: MarkdownBold
+  public let italic: MarkdownItalic
+  public let code: MarkdownCode
 
   // MARK: Escaping Elements
   fileprivate var codeEscaping = MarkdownCodeEscaping()
@@ -65,7 +65,7 @@ open class MarkdownParser: MarkdownStyle {
   }
 
   open func removeCustomElement(_ element: MarkdownElement) {
-    guard let index = customElements.index(where: { someElement -> Bool in
+    guard let index = customElements.firstIndex(where: { someElement -> Bool in
       return element === someElement
     }) else {
       return
