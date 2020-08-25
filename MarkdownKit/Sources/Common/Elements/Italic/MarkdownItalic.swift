@@ -9,7 +9,7 @@ import Foundation
 
 open class MarkdownItalic: MarkdownCommonElement {
   
-  fileprivate static let regex = "(\\s|^)(\\*|_)(?![\\*_\\s])(.+?)(?<![\\*_\\s])(\\2)"
+  fileprivate static let regex = "(\\s+|^)(\\*|_)(.+?)(\\2)"
   
   open var font: MarkdownFont?
   open var color: MarkdownColor?
@@ -17,9 +17,9 @@ open class MarkdownItalic: MarkdownCommonElement {
   open var regex: String {
     return MarkdownItalic.regex
   }
-  
-  public init(font: MarkdownFont?, color: MarkdownColor? = nil) {
-    self.font = font?.italic()
-    self.color = color
+
+  public init(attributes: [String: AnyObject] = [:]) {
+    self.attributes = attributes
   }
+
 }
