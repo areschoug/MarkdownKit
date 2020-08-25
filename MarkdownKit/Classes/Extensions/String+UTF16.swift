@@ -21,17 +21,21 @@ extension String {
   
   /// Converts each 4 digit characters to its String form  (e.g. "0048" -> "H")
   func unescapeUTF16() -> String? {
+    //This is an hot fix for the crash when a regular string is passed here.
+    guard count % 4 == 0 else {
+      return self
+    }
+
     var utf16Array = [UInt16]()
     stride(from: 0, to: count, by: 4).forEach {
-      let si = index(startIndex, offsetBy: $0)
-      let ei = index(startIndex, offsetBy: $0 + 4)
-      let hex4 = self[si..<ei]
-      
+      let startIndex = index(self.startIndex, offsetBy: $0)
+      let endIndex = index(self.startIndex, offsetBy: $0 + 4)
+      let hex4 = String(self[startIndex..<endIndex])
       if let utf16 = UInt16(hex4, radix: 16) {
         utf16Array.append(utf16)
       }
     }
-    
+
     return String(utf16CodeUnits: utf16Array, count: utf16Array.count)
   }
 }
